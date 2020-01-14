@@ -31,17 +31,17 @@ const itemInventory = {
 const coinInventory = {
     nickel: {
         value: 0.05,
-        currentNumber: 90,
+        currentNumber: 8,
         maxNumber: 100
     },
     dime: {
         value: 0.10,
-        currentNumber: 80,
+        currentNumber: 100,
         maxNumber: 100
     },
     quarter: {
         value: 0.25,
-        currentNumber: 55,
+        currentNumber: 0,
         maxNumber: 50
     },
     Loonie: {
@@ -56,4 +56,7 @@ const coinInventory = {
     },
 }
 
-module.exports = itemInventory, coinInventory;
+module.exports = {
+    itemInventory: itemInventory,
+    coinInventory: coinInventory
+}

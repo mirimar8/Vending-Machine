@@ -1,7 +1,6 @@
 const vendingMachine = require('../lib/vending-machine.js');
-const itemInventory = require('../data.js');
-const coinInventory = require('../data.js')
-const vending = new vendingMachine(itemInventory, coinInventory);
+const inventory = require('../data.js');
+const vending = new vendingMachine(inventory);
 
 describe('Vending Machine', () => {
     describe('when selected item in stock', () => {
@@ -19,6 +18,13 @@ describe('Vending Machine', () => {
             expect(vending.refillInventory('bubbleGum')).toEqual(30);
         });
     });
+    describe('when the item is already fully stocked', () => {
+        it('should return an error', () => {
+            expect(() => {
+                vending.refillInventory('doritos')
+            }).toThrow(Error);
+        });
+    });
     describe('when the item selected does not exist in the inventory', () => {
         it('should return an error', () => {
             expect(() => {
@@ -26,15 +32,18 @@ describe('Vending Machine', () => {
             }).toThrow(Error);
         });
     });
-    // describe('when item selected but the machine is out of coin stock', () => {
-    //     it('should return an error', () => {
-    //         expect(vending('')).toEqual('');
-    //     });
-    //     it('should re-supply the coin inventory to its max capacity', () => {
-    //         expect(vending('')).toEqual('');
-    //     });
-    // });
-
+    describe('when the type of coin inserted does not meet the machine requirements', () => {
+        it('should return an error', () => {
+            expect(() => {
+                vending.resupplyChange('penny')
+            }).toThrow(Error);
+        });
+    });
+    describe('when item selected but the machine is out of coin stock', () => {
+        it('should re-supply the coin inventory to its max capacity', () => {
+            expect(vending.resupplyChange('nickel')).toEqual(92);
+        });
+    });
     describe('when money was inserted with exact amount for purchase', () => {
         it('should return the item', () => {
             expect(vending.purchaseItem('mars', 1)).toEqual('Mars');
@@ -52,21 +61,5 @@ describe('Vending Machine', () => {
             expect(vending.purchaseItem('mars', 2)).toEqual(1);
         });
     });
-
-    // describe('when a specific coin is out of stock', () => {
-    //     it('should return an error', () => {
-    //         expect(vendingMachine('')).toEqual('');
-    //     });
-    // });
-    // describe('when item was selected but money was not inserted', () => {
-    //     it('should return the vending machine screen to its initial state after 15 seconds', () => {
-    //         expect(vendingMachine('')).toEqual('');
-    //     });
-    // });
-    // describe('when the type of coin inserted does not meet the requirements', () => {
-    //     it('should throw an error and return the coin back', () => {
-    //         expect(vendingMachine('')).toEqual('');
-    //     });
-    // });
 
 });
