@@ -11,7 +11,7 @@ const itemInventory = {
     doritos: {
         name: 'Doritos',
         price: 1.35,
-        currentNumber: 3,
+        currentNumber: 10,
         maxNumber: 10
     },
     bubbleGum: {
