@@ -1,5 +1,4 @@
-// const vendingMachine = require('/lib/vending-machine.js')
-// const inventoryData = new vendingMachine(itemInventory, coinInventory);
+
 
 const itemInventory = {
     chips: {

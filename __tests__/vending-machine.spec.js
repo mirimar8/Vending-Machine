@@ -3,6 +3,11 @@ const inventory = require('../data.js');
 const vending = new vendingMachine(inventory);
 
 describe('Vending Machine', () => {
+    describe('display the inventory', () => {
+        it('should return the inventory values', () => {
+            expect(vending.displayInventory());
+        });
+    });
     describe('when selected item in stock', () => {
         it('should return the selected item', () => {
             expect(vending.dispenseItem('chips')).toEqual('Chips');
